@@ -37,6 +37,7 @@ public class OfertaViagemDesconto
         oferta.Desconto = desconto;
 
         //assert
-        Assert.Equal(precoComDesconto, oferta.Preco, 0.001);
+        //Assert.Equal(precoComDesconto, oferta.Preco, 0.001);
+        Assert.Fail("Erro");
     }
 }
