@@ -35,24 +35,24 @@ public class JornadaMilhasContext : IdentityDbContext
         modelBuilder.Entity<Rota>()
                         .Property(a => a.Origem);
         modelBuilder.Entity<Rota>()
-                        .Property(a => a.Destino); 
+                        .Property(a => a.Destino);
         modelBuilder.Entity<Rota>().Ignore(a => a.Erros);
         modelBuilder.Entity<Rota>().Ignore(a => a.EhValido);
 
         //OfertaViagem
         modelBuilder.Entity<OfertaViagem>().HasKey(e => e.Id);
         modelBuilder.Entity<OfertaViagem>()
-                        .OwnsOne(o => o.Periodo,periodo =>
+                        .OwnsOne(o => o.Periodo, periodo =>
                         {
                             periodo.Property(e => e.DataInicial).HasColumnName("DataInicial");
                             periodo.Property(e => e.DataFinal).HasColumnName("DataFinal");
-                            periodo.Ignore(e=>e.Erros);
-                            periodo.Ignore(e=>e.EhValido);
+                            periodo.Ignore(e => e.Erros);
+                            periodo.Ignore(e => e.EhValido);
                         });
         modelBuilder.Entity<OfertaViagem>()
             .Property(o => o.Preco);
         modelBuilder.Entity<OfertaViagem>().Ignore(a => a.Erros);
-         modelBuilder.Entity<OfertaViagem>().Ignore(a => a.EhValido);
+        modelBuilder.Entity<OfertaViagem>().Ignore(a => a.EhValido);
 
         base.OnModelCreating(modelBuilder);
     }

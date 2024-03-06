@@ -18,20 +18,20 @@ public static class OfertaViagemExtensions
                 oferta = converter.RequestToEntity(ofertaReq);
                 if (oferta.EhValido)
                 {
-                   await entityDAL.Adicionar(oferta);
+                    await entityDAL.Adicionar(oferta);
                     return Results.Ok();
-                } 
+                }
                 throw new Exception("Oferta inválida");
-                
+
             }
             catch (Exception ex)
             {
-               return Results.Problem($"Erro:{oferta.Erros} => {ex.Message}");
+                return Results.Problem($"Erro:{oferta.Erros} => {ex.Message}");
             }
-            
+
         }).WithTags("Oferta Viagem").WithSummary("Adiciona uma nova oferta de viagem.").WithOpenApi().RequireAuthorization();
 
-        app.MapGet("/ofertas-viagem/{id}", ([FromServices] OfertaViagemConverter converter, [FromServices] EntityDAL<OfertaViagem> entityDAL,int id) =>
+        app.MapGet("/ofertas-viagem/{id}", ([FromServices] OfertaViagemConverter converter, [FromServices] EntityDAL<OfertaViagem> entityDAL, int id) =>
         {
             var oferta = entityDAL.RecuperarPor(a => a.Id == id);
             if (oferta is null) return Results.NotFound();
@@ -49,9 +49,9 @@ public static class OfertaViagemExtensions
             return Results.NoContent();
         }).WithTags("Oferta Viagem").WithSummary("Deleta uma oferta de viagem por id.").WithOpenApi().RequireAuthorization();
 
-        app.MapPut("/ofertas-viagem", async([FromServices] OfertaViagemConverter converter, [FromServices] EntityDAL<OfertaViagem> entityDAL, [FromBody] OfertaViagemEditRequest ofertaReq) =>
+        app.MapPut("/ofertas-viagem", async ([FromServices] OfertaViagemConverter converter, [FromServices] EntityDAL<OfertaViagem> entityDAL, [FromBody] OfertaViagemEditRequest ofertaReq) =>
         {
-           var ofertaAtualizada = entityDAL.RecuperarPor(a => a.Id == ofertaReq.Id);
+            var ofertaAtualizada = entityDAL.RecuperarPor(a => a.Id == ofertaReq.Id);
             var ofertaConvertida = converter.RequestToEntity(ofertaReq);
             if (ofertaAtualizada is null)
             {
@@ -64,12 +64,12 @@ public static class OfertaViagemExtensions
 
         }).WithTags("Oferta Viagem").WithSummary("Atualiza uma oferta de viagem.").WithOpenApi().RequireAuthorization();
 
-        app.MapGet("/ofertas-viagem/", async ([FromServices] OfertaViagemConverter converter, [FromServices] EntityDAL<OfertaViagem> entityDAL, [FromQuery]int pagina=1, [FromQuery]int tamanhoPorPagina=25) =>
+        app.MapGet("/ofertas-viagem/", async ([FromServices] OfertaViagemConverter converter, [FromServices] EntityDAL<OfertaViagem> entityDAL, [FromQuery] int pagina = 1, [FromQuery] int tamanhoPorPagina = 25) =>
         {
             var oferta = await entityDAL.ListarPaginado(pagina, tamanhoPorPagina);
             if (oferta is null) return Results.NotFound();
             return Results.Ok(converter.EntityListToResponseList(oferta));
         }).WithTags("Oferta Viagem").WithSummary("Obtem oferta de viagem paginado.").WithOpenApi().RequireAuthorization();
-          
+
     }
 }

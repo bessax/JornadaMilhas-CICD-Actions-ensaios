@@ -54,9 +54,9 @@ internal class GenerateToken
         }
 
         return new UserTokenDTO()
-        {        
+        {
             Token = new JwtSecurityTokenHandler().WriteToken(token),
-            Expiration = expiracaoEmHoras,    
+            Expiration = expiracaoEmHoras,
         };
     }
 }

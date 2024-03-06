@@ -2,7 +2,7 @@
 using JornadaMilhas.Dominio.ValueObjects;
 
 namespace JornadaMilhas.Integration.Test.API.DataBuilders;
-internal class PeriodoDataBuilder: Faker<Periodo>
+internal class PeriodoDataBuilder : Faker<Periodo>
 {
     public DateTime? DataInicial { get; set; }
     public DateTime? DataFinal { get; set; }

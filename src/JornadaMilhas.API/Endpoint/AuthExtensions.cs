@@ -32,7 +32,7 @@ public static class AuthExtensions
 
         //}).WithTags("Autenticação").WithSummary("Registrar um novo usuário de autenticação.").WithOpenApi();
 
-        app.MapPost("/auth-login", async (             
+        app.MapPost("/auth-login", async (
               [FromServices] SignInManager<IdentityUser> signInManager,
               [FromServices] GenerateToken generateToken,
               [FromBody] UserDTO user) =>

@@ -1,17 +1,11 @@
 ﻿using JornadaMilhas.Dominio.Entidades;
 using JornadaMilhas.Dominio.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Json;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using JornadaMilhas.Integration.Test.API.DataBuilders;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Http.Json;
 
 namespace JornadaMilhas.Integration.Test.API;
-public class OfertaViagem_GET: IClassFixture<JornadaMilhasWebApplicationFactory>
+public class OfertaViagem_GET : IClassFixture<JornadaMilhasWebApplicationFactory>
 {
     private readonly JornadaMilhasWebApplicationFactory app;
 
@@ -44,7 +38,7 @@ public class OfertaViagem_GET: IClassFixture<JornadaMilhasWebApplicationFactory>
 
         //Assert
         Assert.NotNull(response);
-        Assert.Equal(ofertaExistente.Preco,response.Preco,0.001);
+        Assert.Equal(ofertaExistente.Preco, response.Preco, 0.001);
         Assert.Equal(ofertaExistente.Rota.Origem, response.Rota.Origem);
         Assert.Equal(ofertaExistente.Rota.Destino, response.Rota.Destino);
     }
@@ -68,7 +62,7 @@ public class OfertaViagem_GET: IClassFixture<JornadaMilhasWebApplicationFactory>
 
         //Assert
         Assert.True(response != null);
-        Assert.Equal(tamanhoPorPagina, response.Count());        
+        Assert.Equal(tamanhoPorPagina, response.Count());
     }
 
     [Fact]
@@ -139,10 +133,10 @@ public class OfertaViagem_GET: IClassFixture<JornadaMilhasWebApplicationFactory>
         int tamanhoPorPagina = 25;
 
         //Act + Assert
-        await Assert.ThrowsAsync<HttpRequestException>(async ()=>
+        await Assert.ThrowsAsync<HttpRequestException>(async () =>
         {
 
-         var response = await client.GetFromJsonAsync<ICollection<OfertaViagem>>($"/ofertas-viagem?pagina={pagina}&tamanhoPorPagina={tamanhoPorPagina}");
+            var response = await client.GetFromJsonAsync<ICollection<OfertaViagem>>($"/ofertas-viagem?pagina={pagina}&tamanhoPorPagina={tamanhoPorPagina}");
         });
 
     }

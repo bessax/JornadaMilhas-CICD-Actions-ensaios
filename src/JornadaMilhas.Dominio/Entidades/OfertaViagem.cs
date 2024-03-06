@@ -8,12 +8,12 @@ public class OfertaViagem : Valida
     public const double DESCONTO_MAXIMO = 0.7;
     private double desconto;
     public int Id { get; set; }
-    public virtual Rota Rota { get; set; } 
+    public virtual Rota Rota { get; set; }
     public Periodo Periodo { get; set; } // ValueObject (DDD)
     public double Preco { get; set; }
     public OfertaViagem()
     {
-            
+
     }
     public OfertaViagem(Rota rota, Periodo periodo, double preco)
     {

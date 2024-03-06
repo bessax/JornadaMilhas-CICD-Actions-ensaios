@@ -11,7 +11,7 @@ public static class MigracoesPendentes
         {
             var serviceDb = serviceScope.ServiceProvider
                              .GetService<JornadaMilhasContext>();
-           
+
             serviceDb!.Database.Migrate();
         }
     }

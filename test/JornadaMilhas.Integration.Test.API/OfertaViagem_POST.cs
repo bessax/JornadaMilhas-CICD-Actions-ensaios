@@ -1,17 +1,10 @@
-﻿using JornadaMilhas.API.DTO.Auth;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Json;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using JornadaMilhas.Dominio.Entidades;
+﻿using JornadaMilhas.Dominio.Entidades;
 using JornadaMilhas.Dominio.ValueObjects;
-using System.Data;
+using System.Net;
+using System.Net.Http.Json;
 
 namespace JornadaMilhas.Integration.Test.API;
-public class OfertaViagem_POST:IClassFixture<JornadaMilhasWebApplicationFactory>
+public class OfertaViagem_POST : IClassFixture<JornadaMilhasWebApplicationFactory>
 {
     private readonly JornadaMilhasWebApplicationFactory app;
 

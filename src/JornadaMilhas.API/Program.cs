@@ -15,7 +15,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
 
-builder.Services.AddDbContext<JornadaMilhasContext>((options) => {
+builder.Services.AddDbContext<JornadaMilhasContext>((options) =>
+{
     options
         .UseLazyLoadingProxies()
         .UseSqlServer(builder.Configuration["ConnectionString:DefaultConnection"]);
@@ -77,7 +78,7 @@ if (app.Environment.IsDevelopment())
 app.UseCors(options =>
 {
     options.AllowAnyOrigin()
-    .AllowAnyMethod()   
+    .AllowAnyMethod()
     .AllowAnyHeader();
 
 });
@@ -101,7 +102,7 @@ app.Run();
 async Task ConfigureDefaultUser(IServiceProvider serviceProvider)
 {
     using (var scope = serviceProvider.CreateScope())
-    {     
+    {
         var userManager = scope.ServiceProvider.GetService<UserManager<IdentityUser>>();
         var defaultUser = await userManager!.FindByNameAsync("tester@email.com");
 
@@ -114,7 +115,7 @@ async Task ConfigureDefaultUser(IServiceProvider serviceProvider)
                 EmailConfirmed = true
             };
 
-            var result = await userManager.CreateAsync(identityUser,"Senha123@");
+            var result = await userManager.CreateAsync(identityUser, "Senha123@");
             if (!result.Succeeded)
             {
                 throw new Exception("Erro ao criar o usuário padrão.");

@@ -18,13 +18,13 @@ public class OfertaViagemConverter
     {
         if (ofertaViagemRequest.rota is null)
         {
-            return new OfertaViagem(null, periodoConverter.RequestToEntity(ofertaViagemRequest.periodo), ofertaViagemRequest.preco);           
+            return new OfertaViagem(null, periodoConverter.RequestToEntity(ofertaViagemRequest.periodo), ofertaViagemRequest.preco);
         }
         if (ofertaViagemRequest.periodo is null)
         {
-            return new OfertaViagem(rotaConverter.RequestToEntity(ofertaViagemRequest.rota),null, ofertaViagemRequest.preco);
+            return new OfertaViagem(rotaConverter.RequestToEntity(ofertaViagemRequest.rota), null, ofertaViagemRequest.preco);
         }
-        if (ofertaViagemRequest.preco <=0)
+        if (ofertaViagemRequest.preco <= 0)
         {
             return new OfertaViagem(rotaConverter.RequestToEntity(ofertaViagemRequest.rota), periodoConverter.RequestToEntity(ofertaViagemRequest.periodo), ofertaViagemRequest.preco);
         }

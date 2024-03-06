@@ -9,7 +9,7 @@ public class Rota : Valida
 
     public Rota()
     {
-            
+
     }
     public Rota(string origem, string destino)
     {

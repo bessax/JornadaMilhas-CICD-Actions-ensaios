@@ -33,7 +33,7 @@ public class Erros : IEnumerable<Erro>
 public record Erro(string Mensagem);
 
 public interface IValidavel
-{ 
+{
     bool EhValido { get; }
     Erros Erros { get; }
 }

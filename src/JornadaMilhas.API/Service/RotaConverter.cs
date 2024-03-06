@@ -1,7 +1,6 @@
 ﻿using JornadaMilhas.API.DTO.Request;
 using JornadaMilhas.API.DTO.Response;
 using JornadaMilhas.Dominio.Entidades;
-using Microsoft.IdentityModel.Tokens;
 
 namespace JornadaMilhas.API.Service;
 
@@ -9,11 +8,11 @@ public class RotaConverter
 {
     public Rota RequestToEntity(RotaRequest rotaRequest)
     {
-        if (string.IsNullOrEmpty(rotaRequest.origem)||string.IsNullOrEmpty(rotaRequest.destino))
+        if (string.IsNullOrEmpty(rotaRequest.origem) || string.IsNullOrEmpty(rotaRequest.destino))
         {
-            return new Rota(null,null);
+            return new Rota(null, null);
         }
-        return new Rota(rotaRequest.origem,rotaRequest.destino) ;
+        return new Rota(rotaRequest.origem, rotaRequest.destino);
     }
 
     public RotaResponse EntityToResponse(Rota rota)

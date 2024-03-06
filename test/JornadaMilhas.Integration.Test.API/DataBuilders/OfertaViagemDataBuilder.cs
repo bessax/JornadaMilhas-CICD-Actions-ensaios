@@ -4,7 +4,7 @@ using JornadaMilhas.Dominio.ValueObjects;
 
 namespace JornadaMilhas.Integration.Test.API.DataBuilders;
 
-internal class OfertaViagemDataBuilder:Faker<OfertaViagem>
+internal class OfertaViagemDataBuilder : Faker<OfertaViagem>
 {
     public Rota? Rota { get; set; }
     public Periodo? Periodo { get; set; }
@@ -13,11 +13,12 @@ internal class OfertaViagemDataBuilder:Faker<OfertaViagem>
 
     public OfertaViagemDataBuilder()
     {
-        CustomInstantiator(f => {
-             Periodo periodo = Periodo ?? new PeriodoDataBuilder().Build();
-             Rota rota = Rota ?? new RotaDataBuilder().Build();
-             double preco = f.Random.Double(PrecoMinimo, PrecoMaximo);
-             return new OfertaViagem(rota, periodo, preco);
+        CustomInstantiator(f =>
+        {
+            Periodo periodo = Periodo ?? new PeriodoDataBuilder().Build();
+            Rota rota = Rota ?? new RotaDataBuilder().Build();
+            double preco = f.Random.Double(PrecoMinimo, PrecoMaximo);
+            return new OfertaViagem(rota, periodo, preco);
         });
     }
 }
