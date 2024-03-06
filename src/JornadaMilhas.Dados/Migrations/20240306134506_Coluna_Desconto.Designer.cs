@@ -4,6 +4,7 @@ using JornadaMilhas.Dados;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JornadaMilhas.Dados.Migrations
 {
     [DbContext(typeof(JornadaMilhasContext))]
-    partial class JornadaMilhasContextModelSnapshot : ModelSnapshot
+    [Migration("20240306134506_Coluna_Desconto")]
+    partial class Coluna_Desconto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

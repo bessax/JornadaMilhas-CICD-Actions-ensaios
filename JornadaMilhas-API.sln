@@ -17,7 +17,7 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JornadaMilhas.Integration.Test.API", "test\JornadaMilhas.Integration.Test.API\JornadaMilhas.Integration.Test.API.csproj", "{41736EC6-0152-482A-B156-AB57CD2BBF7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JornadaMilhas.Unity.Test", "test\JornadaMilhas.Unity.Test\JornadaMilhas.Unity.Test.csproj", "{5F2E16CA-72DE-44B9-B69B-7D8D7A8E8DEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JornadaMilhas.Unity.Test", "test\JornadaMilhas.Unity.Test\JornadaMilhas.Unity.Test.csproj", "{5F2E16CA-72DE-44B9-B69B-7D8D7A8E8DEA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
