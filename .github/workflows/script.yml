@@ -6,10 +6,9 @@ name: Pipeline
 on:
  push:
   branches: ["master"]
- pull_request:
-  branches: ["master"]
 jobs:
   build:
+   name: Minha primeira pipeline  
    runs-on: ubuntu-latest
    steps:     
       - name: Setup .NET
