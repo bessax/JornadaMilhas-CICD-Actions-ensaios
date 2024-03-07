@@ -36,10 +36,8 @@ public class JornadaMilhasWebApplicationFactory : WebApplicationFactory<Program>
                         options
                         .UseLazyLoadingProxies()
                         .UseSqlServer(_mssqlContainer.GetConnectionString()));
-
         });
     }
-
 
     public JornadaMilhasContext Context { get; private set; }
 
