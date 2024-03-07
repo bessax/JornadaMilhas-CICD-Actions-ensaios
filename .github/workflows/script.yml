@@ -38,6 +38,7 @@ jobs:
           path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
+    name: Pipeline de Deploy no Azure  
     runs-on: ubuntu-latest
     needs: build
     environment:
