@@ -7,6 +7,9 @@ on:
  push:
   branches:
    - $default-branch-name
+ pull_request:
+   branches:
+   - $default-branch-name
 jobs:
   build:
    name: Minha primeira pipeline  
