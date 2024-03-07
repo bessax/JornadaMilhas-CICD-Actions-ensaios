@@ -1,26 +1,33 @@
 ﻿using JornadaMilhas.API.DTO.Auth;
 using JornadaMilhas.Dados;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Hosting;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using Testcontainers.MsSql;
 
 namespace JornadaMilhas.Integration.Test.API;
-public class JornadaMilhasWebApplicationFactory : WebApplicationFactory<Program>
+public class JornadaMilhasWebApplicationFactory : WebApplicationFactory<Program>, IAsyncLifetime
 {
     private IServiceScope scope;
 
-    public JornadaMilhasWebApplicationFactory()
-    {
+    private readonly MsSqlContainer _mssqlContainer = new MsSqlBuilder()
+    .WithImage("mcr.microsoft.com/mssql/server:2022-latest")
+    .Build();
+
+    public async Task InitializeAsync() {
+
+        await _mssqlContainer.StartAsync();
         this.scope = Services.CreateScope();
         Context = scope.ServiceProvider.GetRequiredService<JornadaMilhasContext>();
     }
 
-    protected override IHost CreateHost(IHostBuilder builder)
+    protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
+       
         builder.ConfigureServices(services =>
         {
             services.RemoveAll(typeof(DbContextOptions<JornadaMilhasContext>));
@@ -28,13 +35,13 @@ public class JornadaMilhasWebApplicationFactory : WebApplicationFactory<Program>
             services.AddDbContext<JornadaMilhasContext>(options =>
                         options
                         .UseLazyLoadingProxies()
-                        .UseSqlServer("Server=localhost,11433;Database=JornadaMilhasV3;User Id=sa;Password=Alura#2024;Encrypt=false;TrustServerCertificate=true;MultipleActiveResultSets=true;"));
+                        .UseSqlServer(_mssqlContainer.GetConnectionString()));
 
         });
-        return base.CreateHost(builder);
     }
 
-    public JornadaMilhasContext Context { get; }
+
+    public JornadaMilhasContext Context { get; private set; }
 
     public async Task<HttpClient> GetClientWithAccessTokenAsync()
     {
@@ -50,5 +57,11 @@ public class JornadaMilhasWebApplicationFactory : WebApplicationFactory<Program>
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", result!.Token);
 
         return client;
+    }
+       
+
+    public new async Task DisposeAsync()
+    {
+        await _mssqlContainer.DisposeAsync();
     }
 }

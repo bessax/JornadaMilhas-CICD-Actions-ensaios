@@ -5,7 +5,8 @@
 name: Pipeline
 on:
  push:
-  branches: ["master"]
+  branches:
+   - $default-branch-name
 jobs:
   build:
    name: Minha primeira pipeline  
@@ -20,6 +21,10 @@ jobs:
        #dotnet test ./test/JornadaMilhas.Unity.Test
       - name: Execução do teste de unidade 
         run: dotnet test ./test/JornadaMilhas.Unity.Test
+      #dotnet test ./test/JornadaMilhas.Integration.Test.API
+      - name: Testes Integração
+        run: dotnet test ./test/JornadaMilhas.Integration.Test.API 
        #dotnet publish ./src/JornadaMilhas.API
       - name: Publicando a API
         run: dotnet publish ./src/JornadaMilhas.API
+
