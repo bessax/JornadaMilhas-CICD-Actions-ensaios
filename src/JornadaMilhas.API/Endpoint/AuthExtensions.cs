@@ -46,6 +46,6 @@ public static class AuthExtensions
             }
             return Results.Ok(generateToken.GenerateUserToken(user));
 
-        }).WithTags("Autenticação v2").WithSummary("Realiza o login de um usuário.").WithOpenApi();
+        }).WithTags("Autenticação").WithSummary("Realiza o login de um usuário.").WithOpenApi();
     }
 }
