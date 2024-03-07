@@ -5,11 +5,7 @@
 name: Pipeline
 on:
  push:
-  branches:
-   - $default-branch-name
- pull_request:
-   branches:
-   - $default-branch-name
+  branches: ["master"]
 jobs:
   build:
    name: Minha primeira pipeline  

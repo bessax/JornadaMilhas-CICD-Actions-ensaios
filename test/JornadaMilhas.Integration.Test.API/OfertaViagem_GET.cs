@@ -14,6 +14,7 @@ public class OfertaViagem_GET : IClassFixture<JornadaMilhasWebApplicationFactory
         this.app = app;
     }
 
+
     [Fact]
     public async Task Recuperar_OfertaViagem_PorId()
     {
