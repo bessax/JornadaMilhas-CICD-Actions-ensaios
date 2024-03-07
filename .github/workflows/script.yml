@@ -24,7 +24,7 @@ jobs:
        #dotnet test ./test/JornadaMilhas.Unity.Test
       - name: Execução do teste de unidade 
         run: dotnet test ./test/JornadaMilhas.Unity.Test
-      #dotnet test ./test/JornadaMilhas.Integration.Test.API
+      #dotnet test ./test/JornadaMilhas.Integration.Test.API 
       - name: Testes Integração
         run: dotnet test ./test/JornadaMilhas.Integration.Test.API 
        #dotnet publish ./src/JornadaMilhas.API
