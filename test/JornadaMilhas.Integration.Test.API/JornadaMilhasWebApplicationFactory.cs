@@ -7,11 +7,16 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using Testcontainers.MsSql;
 
 namespace JornadaMilhas.Integration.Test.API;
 public class JornadaMilhasWebApplicationFactory : WebApplicationFactory<Program>
 {
     private IServiceScope scope;
+
+    private readonly MsSqlContainer _mssqlContainer = new MsSqlBuilder()
+    .WithImage("mcr.microsoft.com/mssql/server:2022-latest")
+    .Build();
 
     public JornadaMilhasWebApplicationFactory()
     {
@@ -28,7 +33,7 @@ public class JornadaMilhasWebApplicationFactory : WebApplicationFactory<Program>
             services.AddDbContext<JornadaMilhasContext>(options =>
                         options
                         .UseLazyLoadingProxies()
-                        .UseSqlServer("Server=localhost,11433;Database=JornadaMilhasV3;User Id=sa;Password=Alura#2024;Encrypt=false;TrustServerCertificate=true;MultipleActiveResultSets=true;"));
+                        .UseSqlServer(_mssqlContainer.GetConnectionString()));
 
         });
         return base.CreateHost(builder);
