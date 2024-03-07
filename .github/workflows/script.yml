@@ -16,24 +16,29 @@ jobs:
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: 8.0.x
-      - name: Checkout do código
+      - name: Checkout do cÃ³digo
         uses: actions/checkout@v2      
+
        #dotnet test ./test/JornadaMilhas.Unity.Test
-      - name: Execução do teste de unidade 
+      - name: ExecuÃ§Ã£o do teste de unidade 
         run: dotnet test ./test/JornadaMilhas.Unity.Test
+
       #dotnet test ./test/JornadaMilhas.Integration.Test.API 
-      - name: Testes Integração
+      - name: Testes IntegraÃ§Ã£o
         run: dotnet test ./test/JornadaMilhas.Integration.Test.API 
+
        #dotnet publish ./src/JornadaMilhas.API
       - name: Publicando a API
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
-      - name: Upload artifact for deployment job
+      
+      - name: Upload de artefato para deploy
         uses: actions/upload-artifact@v3
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
+
   deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs: build
     environment:
       name: 'Production'
@@ -43,7 +48,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
-          name: .net-app
+           name: .net-app
       
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
