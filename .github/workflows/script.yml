@@ -5,6 +5,8 @@ name: Pipeline
 on:
  push:
   branches: ["master"]
+ pull_request:
+  branches: ["master"]
 jobs:
   build:
    name: Minha primeira pipeline  
@@ -14,15 +16,46 @@ jobs:
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: 8.0.x
-      - name: Checkout do código
+      - name: Checkout do cÃ³digo
         uses: actions/checkout@v2      
+
        #dotnet test ./test/JornadaMilhas.Unity.Test
-      - name: Execução do teste de unidade 
+      - name: ExecuÃ§Ã£o do teste de unidade 
         run: dotnet test ./test/JornadaMilhas.Unity.Test
+
       #dotnet test ./test/JornadaMilhas.Integration.Test.API 
-      - name: Testes Integração
+      - name: Testes IntegraÃ§Ã£o
         run: dotnet test ./test/JornadaMilhas.Integration.Test.API 
+
        #dotnet publish ./src/JornadaMilhas.API
       - name: Publicando a API
-        run: dotnet publish ./src/JornadaMilhas.API
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp ./src/JornadaMilhas.API
+      
+      - name: Upload de artefato para deploy
+        uses: actions/upload-artifact@v3
+        with:
+          name: .net-app
+          path: ${{env.DOTNET_ROOT}}/myapp
 
+  deploy:
+    name: Pipeline de Deploy no Azure  
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    
+    steps:
+      - name: Download do artefado para build
+        uses: actions/download-artifact@v3
+        with:
+           name: .net-app
+      
+      - name: Deploy da solução no Azure
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'jornadamilhas-api'
+          slot-name: 'Production'
+          package: .
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9ABDA58C7FE54ACDA81C70C601C19874 }}
